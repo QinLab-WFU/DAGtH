@@ -1,0 +1,31 @@
+m1: L_triplet + L_an + Adam
+[dataset:cifar][bits:32][best-epoch:99][best-mAP:0.817]
+[dataset:nuswide][bits:32][best-epoch:84][best-mAP:0.792]
+
+m2: L_triplet + Adam
+[dataset:cifar][bits:32][best-epoch:4][best-mAP:0.826]
+[dataset:nuswide][bits:32][best-epoch:4][best-mAP:0.840]
+[dataset:flickr][bits:32][best-epoch:24][best-mAP:0.820]
+[dataset:coco][bits:32][best-epoch:74][best-mAP:0.680]
+
+m3(*): m2+AdamW+lr=5e-5
+[dataset:cifar][bits:32][best-epoch:19][best-mAP:0.851]
+[dataset:nuswide][bits:32][best-epoch:14][best-mAP:0.847]
+[dataset:flickr][bits:32][best-epoch:14][best-mAP:0.828]
+[dataset:coco][bits:32][best-epoch:99][best-mAP:0.699]
+
+m4: m1+AdamW+lr=5e-5
+[dataset:cifar][bits:32][best-epoch:64][best-mAP:0.851]
+[dataset:nuswide][bits:32][best-epoch:74][best-mAP:0.807]
+[dataset:flickr][bits:32][best-epoch:99][best-mAP:0.809]
+[dataset:coco][bits:32][best-epoch:84][best-mAP:0.643]
+
+m5: m2 + bound ε [0, 0.5]
+[dataset:cifar][bits:32][best-epoch:74][best-mAP:0.853]
+[dataset:nuswide][bits:32][best-epoch:14][best-mAP:0.847]
+[dataset:flickr][bits:32][best-epoch:14][best-mAP:0.828]
+[dataset:coco][bits:32][best-epoch:99][best-mAP:0.699]
+
+so:
+1) L_an is useless (m1 vs. m2). Because the added restriction L_an would limit the range of values of AN, it would be difficult to satisfy the restriction in other triples containing AN.
+2) Is AutoMargin working? (m3 vs. BaseLine.m6) Not so much, May be the k_delta is not so good.
